@@ -1,0 +1,41 @@
+<div class="app-container">
+  <header class="global-header">
+    <h1 class="main-header">Звідси починається найкраща дружба</h1>
+    <form class="search-form">
+      <pet-world-select
+        class="search-form__select"
+        keyValue="value"
+        [control]="animalType"
+        [label]="labelTypes.animalType"
+        [dropdown]="animalTypes"
+        [placeholder]="placeholders.animalType"
+        [isVirtualScroll]="false"
+      />
+
+      <pet-world-select
+        class="search-form__select"
+        [control]="location"
+        [label]="labelTypes.location"
+        [dropdown]="cityList"
+        [placeholder]="placeholders.location"
+      />
+
+      <pet-world-button class="search" (click)="onSearch()">
+        {{ buttonContent.search }}
+      </pet-world-button>
+    </form>
+  </header>
+
+  <pet-world-pet-categories class="pet-categories" />
+
+  <section class="newest-ads-section">
+    <h2 class="newest-ads-section__header">Найновіші оголошення</h2>
+    <ul class="newest-ads-section__pet-cards">
+      @for (card of proposals$ | async; track card.id) {
+        <li>
+          <pet-world-pet-card [petCard]="card" (click)="onProposal(card.id)" />
+        </li>
+      }
+    </ul>
+  </section>
+</div>

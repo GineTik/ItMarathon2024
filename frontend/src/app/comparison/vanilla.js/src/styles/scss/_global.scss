@@ -1,0 +1,113 @@
+@import 'variables';
+@import 'mixins';
+@import 'extends';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $main-font;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+ul,
+menu {
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 2px;
+}
+
+address {
+  font-style: normal;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+}
+
+.app-container {
+  max-width: 1224px;
+  min-width: fit-content;
+  margin: 0 auto;
+}
+
+.app-tooltip {
+  @include text-sizes($font-size-s-2, $line-height-10);
+  position: absolute;
+  display: none;
+  width: 216px;
+  padding: 4px 8px;
+  color: $color-white-1;
+  background-color: $color-gray-5;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px $color-black-3-a-15;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    right: 16px;
+    display: block;
+    width: 8px;
+    height: 8px;
+    background-color: $color-gray-5;
+    border-radius: 2px 0 0 0;
+    transform: rotate(45deg);
+  }
+
+  &--telegram {
+    top: 32px;
+    right: -8px;
+  }
+}
+
+.app-tooltip-surrounder {
+  position: relative;
+  display: inline-block;
+}
+
+.app-tooltip-target {
+  &:hover + .app-tooltip {
+    display: inline-block;
+  }
+}
+
+::-webkit-scrollbar {
+  height: 7px;
+  width: 7px;
+  background: $color-pink-2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $color-blue-9;
+  -webkit-border-radius: $border-radius-2;
+}

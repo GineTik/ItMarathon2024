@@ -1,0 +1,14 @@
+@import 'extends';
+@import 'mixins';
+@import 'variables';
+
+.control__wrapper {
+  @include form-wrapper;
+  @include form-wrapper-stepper;
+}
+
+.animal-price {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}

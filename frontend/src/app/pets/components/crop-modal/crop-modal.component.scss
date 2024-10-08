@@ -1,0 +1,74 @@
+@import 'mixins';
+@import 'variables';
+@import 'animations';
+
+.modal {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 484px;
+    padding: 28px 24px 24px;
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  &__title {
+    @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-2, 500);
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+
+    .file-requirements {
+      &__item {
+        @include text-sizes($font-size-s-5, $line-height-9, $letter-spacing-3);
+      }
+
+      &__property {
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+.drop-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 176px;
+  padding: 68px 36px;
+  border-radius: $border-radius-5;
+  border: 2px dashed $color-blue-15;
+  background: url('/assets/icons/sprite-icons-small.svg#cloud') no-repeat center 32px / 32px;
+
+  &__hint {
+    @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-2);
+  }
+
+  &__separator {
+    @include text-sizes($font-size-s-4, $line-height-1, $letter-spacing-2);
+  }
+
+  &__link {
+    @include text-sizes($font-size-s-4, $line-height-1, $letter-spacing-2);
+    @include link-action;
+    text-underline-offset: 3px;
+    cursor: pointer;
+  }
+
+  &__input {
+    display: none;
+  }
+}
+
+.fileover {
+  animation: shake 1s;
+  animation-iteration-count: infinite;
+}

@@ -1,0 +1,115 @@
+@import 'extends';
+@import 'variables';
+
+:host {
+  position: relative;
+
+  &:hover {
+    ::ng-deep {
+      .ng-select:not(.ng-select-disabled).ng-select-single .ng-select-container {
+        border-color: $color-blue-1;
+      }
+    }
+  }
+
+  &:focus,
+  &:focus-visible,
+  &:focus-within {
+    ::ng-deep {
+      .ng-select:not(.ng-select-disabled).ng-select-single .ng-select-container {
+        border-color: $color-blue-1;
+        outline: 1px solid $color-blue-1;
+      }
+    }
+  }
+
+  &.small {
+    ::ng-deep {
+      .ng-select:not(.ng-select-disabled).ng-select-single .ng-select-container {
+        height: 40px;
+        cursor: pointer;
+      }
+
+      .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+        height: auto;
+      }
+    }
+  }
+
+  ::ng-deep {
+    .ng-select:not(.ng-select-disabled) {
+      .ng-select-container {
+        cursor: pointer;
+      }
+
+      .ng-input > input {
+        cursor: pointer !important;
+      }
+    }
+
+    .ng-select.ng-invalid.ng-touched > .ng-select-container {
+      border-color: red;
+    }
+
+    .ng-select.ng-select-single .ng-select-container {
+      height: 56px;
+    }
+
+    .ng-select.ng-select-single .ng-select-container .ng-value-container .ng-input {
+      height: 46px;
+    }
+
+    .ng-select .ng-select-container .ng-value-container {
+      padding-left: 16px;
+
+      .ng-input {
+        padding-left: 16px;
+
+        > input {
+          height: 100%;
+        }
+      }
+    }
+
+    .ng-select.ng-select-focused:not(.ng-select-opened) > .ng-select-container {
+      border-color: $color-blue-1;
+      box-shadow: unset;
+    }
+
+    .ng-select .ng-select-container .ng-value-container .ng-placeholder {
+      color: $color-gray-5;
+    }
+
+    .ng-select:not(.ng-select-disabled):last-child {
+      cursor: pointer;
+    }
+
+    .ng-select.ng-select-disabled {
+      .ng-arrow-wrapper:hover .ng-arrow {
+        border-top-color: $color-gray-14;
+      }
+
+      .ng-select-container {
+        &:hover {
+          box-shadow: unset;
+        }
+      }
+    }
+
+    .ng-dropdown-panel {
+      box-shadow:
+        0 2px 6px 2px rgba(0, 0, 0, 0.15),
+        0 1px 2px rgba(0, 0, 0, 0.3);
+      clip-path: inset(0 -10px -10px -10px);
+
+      // TODO: adjust styles to show shadow more design like
+      // border: none;
+      // border-radius: $border-radius-2;
+
+      ::-webkit-scrollbar {
+        height: 4px;
+        width: 4px;
+      }
+    }
+  }
+}

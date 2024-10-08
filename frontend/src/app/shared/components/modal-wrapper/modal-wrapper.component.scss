@@ -1,0 +1,54 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  position: relative;
+  display: block;
+  padding: 48px;
+  border: 1px solid $color-gray-6;
+  border-radius: $border-radius-1;
+
+  &.confirm {
+    width: 390px;
+    padding: 198px 104px 48px;
+    color: $color-black-3;
+    letter-spacing: $letter-spacing-2;
+    text-align: center;
+    box-sizing: content-box;
+    background: top 48px center/119px 119px no-repeat $color-white-1;
+
+    &--success {
+      background-image: url('/assets/icons/sprite-icons-medium.svg#modal-checkmark');
+    }
+
+    &--warning {
+      background-image: url('/assets/icons/sprite-icons-medium.svg#modal-exclamation-mark');
+    }
+  }
+
+  ::ng-deep {
+    .cdk-overlay-container {
+      z-index: 1110;
+    }
+
+    .modal-header {
+      @include text-sizes($font-size-l-1, $line-height-2);
+    }
+
+    .modal-description {
+      @include text-sizes($font-size-s-3, $line-height-1);
+      margin-top: 16px;
+    }
+
+    .modal-button {
+      width: 100%;
+      margin-top: 32px;
+    }
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+}

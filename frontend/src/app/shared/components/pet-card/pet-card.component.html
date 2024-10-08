@@ -1,0 +1,37 @@
+<!-- TODO: add actual data [be aware of price shape] -->
+<article class="pet-card">
+  <!-- TODO: add this button dynamically -->
+  <!-- TODO: add onClick prop -->
+  <!-- <pet-world-edit-button class="edit-button" /> -->
+  <div class="photo__wrapper">
+    @if (isImageVisible) {
+      <img
+        class="photo"
+        [src]="viewDetails.photos"
+        alt="Зображення тваринки"
+        width="288"
+        [height]="photoHeight"
+        (error)="handleImageError($event)"
+      />
+    }
+  </div>
+
+  <div class="description">
+    <!-- TODO: add '...' for text-overflow -->
+    <h3 class="title">{{ viewDetails.title }}</h3>
+
+    <!-- TODO: add / remove element dynamically -->
+    <!-- TODO: add '...' for text-overflow -->
+    @if (isHorizontal()) {
+      <p class="description-text">{{ viewDetails.summary }}</p>
+    }
+
+    <ul class="details">
+      <li class="details__item details__item--location">{{ viewDetails.location }}</li>
+      <li class="details__item details__item--sex">{{ viewDetails.sex }}</li>
+      <li class="details__item details__item--age">{{ viewDetails.age }}</li>
+    </ul>
+
+    <span class="price">{{ viewDetails.price | priceFormat: '₴' }}</span>
+  </div>
+</article>

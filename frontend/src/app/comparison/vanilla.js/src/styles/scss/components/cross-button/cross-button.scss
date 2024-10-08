@@ -1,0 +1,77 @@
+:host {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+
+  &.error,
+  &.warning,
+  &.success {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.error {
+    .close-button__icon:hover {
+      color: $color-red-5;
+    }
+  }
+
+  &.warning {
+    .close-button__icon:hover {
+      color: $color-yellow-2;
+    }
+  }
+
+  &.success {
+    .close-button__icon:hover {
+      color: $color-green-2;
+    }
+  }
+}
+
+.close-button {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+
+  &.error,
+  &.warning,
+  &.success {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.error {
+    .close-button__icon:hover {
+      color: $color-red-5;
+    }
+  }
+
+  &.warning {
+    .close-button__icon:hover {
+      color: $color-yellow-2;
+    }
+  }
+
+  &.success {
+    .close-button__icon:hover {
+      color: $color-green-2;
+    }
+  }
+}
+
+.close-button {
+  &__icon {
+    color: $color-black-3;
+
+    &:hover {
+      color: $color-blue-4;
+    }
+  }
+}
+
+::ng-deep {
+  .cdk-overlay-container {
+    z-index: 1110;
+  }
+}

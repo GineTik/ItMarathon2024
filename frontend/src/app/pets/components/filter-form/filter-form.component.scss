@@ -1,0 +1,51 @@
+@import 'mixins';
+
+:host {
+  @include form-wrapper(24px);
+}
+
+.select-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.one-row {
+  &__wrapper {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__item {
+    flex: 1;
+  }
+}
+
+.price-range {
+  display: flex;
+  flex-direction: column;
+
+  .one-row__wrapper {
+    margin-bottom: 8px;
+  }
+}
+
+.chips {
+  @include custom-control;
+}
+
+.button-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.age__wrapper > .one-row__wrapper:first-of-type {
+  margin-bottom: 16px;
+}
+
+.age__label,
+.price-range__label {
+  @include text-sizes($line-height-3, $line-height-1, $letter-spacing-2);
+  margin-bottom: 16px;
+}

@@ -1,0 +1,46 @@
+@import 'mixins';
+@import 'variables';
+
+:host {
+  @include central-element-page;
+}
+
+.step-counter {
+  @include text-sizes($font-size-s-3, $line-height-1, $letter-spacing-2);
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+progress {
+  width: 100%;
+  height: 4px;
+  margin-bottom: 32px;
+  border-radius: $border-radius-2;
+  background-color: $color-blue-5;
+
+  &::-webkit-progress-bar {
+    background-color: $color-pink-1;
+  }
+
+  &::-webkit-progress-value {
+    background-color: $color-blue-5;
+  }
+}
+
+.button {
+  width: 184px;
+
+  &__wrapper {
+    display: flex;
+  }
+}
+
+.preview-link {
+  @include link-action;
+  @include text-sizes($font-size-s-2, $line-height-4, $letter-spacing-7, 500);
+  cursor: pointer;
+
+  &__wrapper {
+    text-align: center;
+  }
+}

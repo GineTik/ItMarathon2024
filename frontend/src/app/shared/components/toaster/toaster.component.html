@@ -1,0 +1,5 @@
+<aside role="alert" [class]="['toast', type()]">
+  <img src="/assets/icons/sprite-icons-small.svg#toaster-{{ type() }}" width="32" height="32" alt="alert icon" />
+  <p class="message" [title]="message()">{{ message() }}</p>
+  <pet-world-cross-button [class]="type()" [type]="type()" (click)="onClose()" />
+</aside>

@@ -1,0 +1,140 @@
+<div class="select-wrapper">
+  <pet-world-select
+    keyValue="value"
+    [control]="animalType"
+    [label]="labelTypes.animalType"
+    [dropdown]="petTypes()"
+    [placeholder]="placeholders.animalType"
+  />
+
+  <pet-world-select
+    keyValue="value"
+    [control]="breed"
+    [label]="labelTypes.breed"
+    [dropdown]="breedList()"
+    [placeholder]="placeholders.breed"
+    [disabled]="!animalType.value"
+  />
+
+  <pet-world-select
+    [control]="location"
+    [label]="labelTypes.location"
+    [dropdown]="cityList"
+    [placeholder]="placeholders.location"
+  />
+
+  <pet-world-select
+    keyValue="label"
+    [control]="petOrigin"
+    [label]="labelTypes.petOrigin"
+    [dropdown]="petOriginOptionList"
+    [placeholder]="placeholders.petOrigin"
+  />
+
+  <div class="age__wrapper">
+    <h3 class="age__label">Вік</h3>
+    <div class="one-row__wrapper">
+      <pet-world-input
+        class="one-row__item"
+        [inputType]="inputTypes.number"
+        [control]="age"
+        [label]="labelTypes.min"
+        [placeholder]="placeholders.age"
+      />
+
+      <pet-world-select
+        class="one-row__item"
+        keyValue="type"
+        [control]="ageUnit"
+        [dropdown]="periodTypes"
+        [placeholder]="placeholders.period"
+        [isVirtualScroll]="false"
+      />
+    </div>
+
+    <div class="one-row__wrapper">
+      <pet-world-input
+        class="one-row__item"
+        [inputType]="inputTypes.number"
+        [control]="maxAge"
+        [label]="labelTypes.max"
+        [placeholder]="placeholders.age"
+      />
+
+      <pet-world-select
+        class="one-row__item"
+        keyValue="type"
+        [control]="maxAgeUnit"
+        [dropdown]="periodTypes"
+        [placeholder]="placeholders.period"
+        [isVirtualScroll]="false"
+      />
+    </div>
+  </div>
+</div>
+
+<div class="price-range">
+  <h3 class="price-range__label">Ціна</h3>
+  <div class="one-row__wrapper">
+    <pet-world-input
+      class="one-row__item"
+      [inputType]="inputTypes.number"
+      [control]="minPrice"
+      [label]="labelTypes.min"
+      [placeholder]="placeholders.price"
+    />
+
+    <pet-world-input
+      class="one-row__item"
+      [inputType]="inputTypes.number"
+      [control]="maxPrice"
+      [label]="labelTypes.max"
+      [placeholder]="placeholders.price"
+    />
+  </div>
+
+  <pet-world-checkbox class="price-range__checkbox" [control]="freeSaleCheckbox">
+    <span>{{ labelTypes.free }}</span>
+  </pet-world-checkbox>
+</div>
+
+<pet-world-select
+  keyValue="type"
+  [control]="sex"
+  [label]="labelTypes.sex"
+  [dropdown]="genderList"
+  [placeholder]="placeholders.sex"
+/>
+
+<div class="chips__wrapper">
+  <h3 class="chips__label">Здоровʼя</h3>
+  <div class="chips__list">
+    @for (chips of healthList(); track chips) {
+      <pet-world-chips
+        [content]="chips"
+        [isActive]="chips | isChipsActive: health.value"
+        (click)="toggleChipsList(chips, formControlName.health)"
+      />
+    }
+  </div>
+</div>
+
+<div class="chips__wrapper">
+  <h3 class="chips__label">Документи</h3>
+  <div class="chips__list">
+    @for (chips of documentList(); track chips) {
+      <pet-world-chips
+        [content]="chips"
+        [isActive]="chips | isChipsActive: documents.value"
+        (click)="toggleChipsList(chips, formControlName.documents)"
+      />
+    }
+  </div>
+</div>
+
+<div class="button-wrapper">
+  <pet-world-button class="filter-submit small" (click)="filterPetLisT()" [isDisabled]="isFilterFormInValid()"
+    >Застосувати фільтри</pet-world-button
+  >
+  <pet-world-button class="filter-clear secondary" (click)="clearForm()">Очистити фільтри</pet-world-button>
+</div>

@@ -1,0 +1,225 @@
+@mixin app-main-element($background-identifier: none) {
+  @extend %app-main-element;
+  width: $width-app;
+
+  @if ($background-identifier == paws) {
+    @extend %app-paws-background;
+  } @else if ($background-identifier == main) {
+    background:
+      // url('/assets/backgrounds/main-page-main-image.png') 572px -94px / auto no-repeat,
+      url('../../assets/backgrounds/main-page-main-image.png') right 0 top -94px / auto no-repeat,
+      url('../../assets/backgrounds/main-page-curved-arrow.svg') 0 492px / 224px 74px no-repeat,
+      url('../../assets/backgrounds/main-page-double-bubbles.svg') 12px 1084px / 84px 164px no-repeat,
+      url('../../assets/backgrounds/main-page-triple-bubbles.svg') right 0 bottom -32px / 168px 120px no-repeat;
+  } @else if ($background-identifier == not-found) {
+    background:
+      url('/assets/backgrounds/not-found-page.png') right 0 top -94px / auto no-repeat,
+      url('/assets/backgrounds/paws.svg') left 0 bottom -16px no-repeat;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+@mixin central-element-wrapper($padding: 48px 104px, $borderRadius: 28px, $borderColor: $color-gray-6) {
+  display: inline-block;
+  padding: $padding;
+  border-radius: $borderRadius;
+  border: 1px solid $borderColor;
+
+  & .page-title {
+    @include text-sizes($font-size-l-1, $line-height-2, $letter-spacing-2);
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  & .page-description {
+    @include text-sizes($font-size-s-3, $line-height-1, $letter-spacing-2);
+    margin-bottom: 32px;
+    text-align: center;
+  }
+
+  & .page-button {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+}
+
+@mixin input-general-styles {
+  color: $color-black-5;
+  border: 1px solid $color-gray-2;
+  border-radius: 4px;
+
+  &:hover:enabled {
+    border-color: $color-blue-1;
+  }
+
+  &:focus,
+  &:focus-visible {
+    border-color: $color-blue-1;
+    outline: 1px solid $color-blue-1;
+  }
+}
+
+@mixin link-footer {
+  color: $color-blue-4;
+
+  &:hover {
+    color: $color-blue-5;
+  }
+
+  &:active {
+    color: $color-blue-6;
+  }
+}
+
+@mixin link-action {
+  color: $color-blue-1;
+  text-decoration: underline;
+
+  &:hover {
+    color: $color-blue-5;
+  }
+
+  &:active {
+    color: $color-black-4;
+  }
+}
+
+@mixin central-element-page {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  & > .page__wrapper {
+    @include central-element-wrapper;
+  }
+
+  & .content-container {
+    width: 392px;
+  }
+}
+
+@mixin text-sizes($size, $line-height, $letter-spacing: normal, $weight: normal) {
+  font-size: $size;
+  line-height: $line-height;
+  font-weight: $weight;
+  letter-spacing: $letter-spacing;
+}
+
+@mixin text-overflow($white-space: nowrap, $text-overflow: ellipsis) {
+  white-space: $white-space;
+  overflow: hidden;
+  text-overflow: $text-overflow;
+}
+
+@mixin border-styles($color: $color-gray-2, $width: 1px) {
+  border: $width solid $color;
+}
+
+@mixin custom-control {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__label {
+    @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-2);
+  }
+}
+
+@mixin form-wrapper($gap: 16px) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  margin-bottom: 32px;
+}
+
+@mixin key-value-list($list-name) {
+  line-height: $line-height-1;
+  letter-spacing: $letter-spacing-2;
+
+  @if ($list-name == profile) {
+    color: $color-black-5;
+  } @else {
+    color: $color-black-3;
+  }
+
+  &__item {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+    border-bottom: 2px solid $color-purple-2-a-12;
+
+    @if ($list-name == pet-details) {
+      padding: 12px 0;
+    } @else {
+      padding: 16px 0;
+    }
+
+    &:first-child {
+      padding-top: 0;
+    }
+
+    &--vertical {
+      flex-direction: column;
+    }
+  }
+
+  .item {
+    &__name {
+      display: flex;
+      gap: 8px;
+      font-weight: 500;
+
+      @if ($list-name == profile) {
+        font-size: $font-size-s-3;
+      } @else {
+        font-size: $font-size-s-2;
+      }
+
+      &::before {
+        width: 24px;
+        height: 24px;
+      }
+
+      &--location::before {
+        content: url('/assets/icons/sprite-icons-small.svg#location');
+      }
+
+      &--phone::before {
+        content: url('/assets/icons/sprite-icons-small.svg#phone');
+      }
+    }
+
+    &__value {
+      @if ($list-name == profile) {
+        font-size: $font-size-s-1;
+      } @else {
+        font-size: $font-size-s-2;
+      }
+    }
+  }
+}
+
+@mixin icon-mask-background($icon-id, $sprite-size: small) {
+  mask: url('../../assets/icons/sprite-icons-#{$sprite-size}.svg##{$icon-id}');
+  -webkit-mask: url('../../assets/icons/sprite-icons-#{$sprite-size}.svg##{$icon-id}');
+}

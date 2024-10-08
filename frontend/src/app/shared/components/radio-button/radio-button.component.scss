@@ -1,0 +1,66 @@
+@import 'mixins';
+
+:host {
+  &.horizontal {
+    .radio-button__group {
+      flex-direction: row;
+      column-gap: 32px;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+.radio-button {
+  &__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+
+    &:checked {
+      + .radio-button__label::before {
+        background-color: $color-blue-1;
+        border-color: $color-blue-1;
+      }
+    }
+
+    &:focus-visible {
+      + .radio-button__label::before {
+        box-shadow: 0 0 5px $color-blue-16;
+      }
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 2px;
+    color: $color-black-1;
+  }
+
+  &__group-label {
+    @include text-sizes($font-size-s-1, $line-height-4, $letter-spacing-4);
+    display: inline-block;
+    margin-bottom: 10px;
+    color: $color-black-1;
+  }
+
+  &__label {
+    @include text-sizes($font-size-s-2, $line-height-4, $letter-spacing-4);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+
+    &::before {
+      @include border-styles($color-black-1, 2px);
+      content: '';
+      display: block;
+      width: 20px;
+      height: 20px;
+      padding: 3px;
+      background-clip: content-box;
+      border-radius: $border-radius-7;
+    }
+  }
+}

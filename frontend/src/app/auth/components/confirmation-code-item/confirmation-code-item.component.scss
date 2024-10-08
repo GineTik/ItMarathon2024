@@ -1,0 +1,12 @@
+@import 'mixins';
+@import 'variables';
+
+.code-item {
+  @include input-general-styles;
+  display: inline-block;
+  width: 56px;
+  height: 56px;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: $font-size-s-1;
+}

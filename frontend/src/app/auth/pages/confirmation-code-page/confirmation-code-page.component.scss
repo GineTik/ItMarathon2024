@@ -1,0 +1,46 @@
+@import 'mixins';
+
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  //TODO change it after header creation      // the whole page will be removed?
+  padding-top: 30px;
+}
+
+.confirmation-page__wrapper {
+  @include central-element-wrapper;
+  margin-bottom: 346px;
+}
+
+.confirmation-page__content-container {
+  width: 392px;
+}
+
+.page-button {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.code__wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.counter-description,
+.action-description {
+  text-align: center;
+}
+
+.highlighted-text {
+  color: $color-blue-1;
+}
+
+.repeat-code__button {
+  font-size: $font-size-s-1;
+  line-height: $line-height-1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

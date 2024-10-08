@@ -1,0 +1,67 @@
+@import 'mixins';
+
+:host {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+}
+
+.page-title {
+  @include visually-hidden;
+}
+
+.filter {
+  &__wrapper {
+    flex-shrink: 0;
+    width: 288px;
+  }
+
+  &-title {
+    align-self: flex-end;
+
+    &__wrapper {
+      display: flex;
+      height: 64px;
+      padding-bottom: 14px;
+    }
+  }
+}
+
+.action {
+  &__wrapper {
+    display: flex;
+    align-self: end;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  &__sort {
+    width: 216px;
+  }
+
+  &__direction {
+    display: flex;
+    gap: 8px;
+  }
+}
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+
+  .card-list {
+    display: grid;
+
+    &.grid-view {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px 24px;
+    }
+
+    &.list-view {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+}

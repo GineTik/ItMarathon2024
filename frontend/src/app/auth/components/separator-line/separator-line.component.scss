@@ -1,0 +1,25 @@
+@import 'mixins';
+@import 'variables';
+
+:host {
+  display: block;
+  margin-bottom: 40px;
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+
+  &__text {
+    @include text-sizes($font-size-s-4, $line-height-3, $letter-spacing-2, 500);
+    margin: 0 27px;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    height: 1px;
+    background-color: $color-gray-7;
+    flex-grow: 1;
+  }
+}

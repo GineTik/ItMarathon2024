@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.39
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: supersecretrootpass
+      MYSQL_DATABASE: ItMarathonDb
+      MYSQL_USER: TestUser
+      MYSQL_PASSWORD: 123
+    ports:
+      - "3306:3306"
+    volumes:
+      - it-marathon-db-data:/var/lib/mysql
+    restart: always
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    container_name: pet-images
+    hostname: azurite
+    restart: always
+    command: 'azurite --loose --blobHost 0.0.0.0 --blobPort 10000 --location /blobs --debug /blobs/debug.log'
+    ports:
+      - 10000:10000
+    volumes:
+      - it-marathon-blob-data:/blobs
+
+volumes:
+  it-marathon-db-data:
+  it-marathon-blob-data:

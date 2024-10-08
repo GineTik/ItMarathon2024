@@ -1,0 +1,24 @@
+<ul class="user-info" [ngClass]="{ error: !isUserVerified() }">
+  <li class="user-info__item">
+    <span class="item__name item__name--location" [ngClass]="{ required: !isUserComplete() }">Локація</span>
+    <span class="item__value">{{ user()?.location }}</span>
+  </li>
+  <li class="user-info__item">
+    <span class="item__name item__name--phone" [ngClass]="{ required: !isUserComplete() }">Номер телефону</span>
+    <span class="item__value">
+      @if (user()?.phone_number) {
+        {{ user()?.phone_number }}
+      } @else {
+        +38 (___) ___ __ __
+      }
+    </span>
+  </li>
+  <li class="user-info__item">
+    <span class="item__name item__name--email" [ngClass]="{ required: !isUserComplete() }">Імейл</span>
+    <span class="item__value">{{ user()?.email }}</span>
+  </li>
+</ul>
+
+@if (!isUserVerified()) {
+  <p class="no-email-paragraph">Електронну адресу не підтверджено</p>
+}

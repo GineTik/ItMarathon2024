@@ -1,0 +1,170 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  display: inline-block;
+
+  &.small > .button {
+    padding: 10px 24px;
+  }
+
+  &.secondary > .button {
+    @include text-sizes($font-size-s-2, $line-height-4, $letter-spacing-7, 500);
+    @include border-styles($color-blue-1, 2px);
+    padding: 8px 24px;
+    color: $color-blue-1;
+    background-color: $color-white-1;
+
+    &::before {
+      background-color: $color-blue-1;
+    }
+
+    &:hover {
+      border-color: $color-blue-9;
+      color: $color-blue-9;
+
+      &::before {
+        background-color: $color-blue-9;
+      }
+    }
+
+    &:active {
+      border-color: $color-blue-2;
+      color: $color-blue-2;
+
+      &::before {
+        background-color: $color-blue-2;
+      }
+    }
+
+    &:disabled {
+      border-color: $color-gray-1;
+      color: $color-gray-5;
+
+      &::before {
+        background-color: $color-gray-5;
+      }
+    }
+  }
+  &.google > .button {
+    gap: 16px;
+    color: $color-blue-3;
+    background-color: $color-white-1;
+    border: 1px solid $color-gray-2;
+
+    &::before {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background-image: url('/assets/icons/sprite-icons-small.svg#google');
+    }
+  }
+
+  &.icon > .button {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+
+    ::ng-deep {
+      svg {
+        fill: $color-gray-10;
+      }
+    }
+
+    &:disabled {
+      cursor: auto;
+
+      ::ng-deep {
+        svg {
+          fill: $color-blue-1;
+        }
+      }
+    }
+  }
+
+  &.add > .button,
+  &.small > .button,
+  &.search > .button {
+    @include text-sizes($font-size-s-2, $line-height-4, $letter-spacing-7, 500);
+    text-wrap: nowrap;
+  }
+
+  &.add > .button {
+    gap: 8px;
+    padding: 10px 24px 10px 16px;
+
+    &::before {
+      display: inline-block;
+      background-image: url('/assets/icons/sprite-icons-small.svg#plus');
+    }
+  }
+
+  &.filter-submit > .button {
+    gap: 8px;
+
+    &::before {
+      content: url('/assets/icons/sprite-icons-small.svg#filter');
+      display: inline-block;
+    }
+  }
+
+  &.filter-clear > .button {
+    gap: 8px;
+
+    &::before {
+      @include icon-mask-background(cross);
+      display: inline-block;
+    }
+  }
+
+  &.search > .button {
+    gap: 10px;
+    padding-right: 40px;
+
+    &::before {
+      display: inline-block;
+      background-image: url('/assets/icons/sprite-icons-small.svg#search');
+    }
+  }
+
+  &.show-more > .button {
+    @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-2);
+    padding: 8px 24px;
+  }
+}
+
+.button {
+  @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-1, 500);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 16px 24px;
+  font-family: inherit;
+  color: $color-white-1;
+  background-color: $color-blue-1;
+  border-radius: $border-radius-1;
+
+  &:hover {
+    background-color: $color-blue-9;
+  }
+
+  &:active {
+    background-color: $color-blue-2;
+  }
+
+  &:disabled {
+    background-color: $color-gray-1;
+    cursor: not-allowed;
+  }
+
+  &::before {
+    content: '';
+    display: none;
+    width: 18px;
+    height: 18px;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}

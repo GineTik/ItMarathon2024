@@ -1,0 +1,22 @@
+@import 'mixins';
+
+.chips {
+  @include text-sizes($font-size-s-2, $line-height-4, $letter-spacing-7, 500);
+  @include border-styles($color-gray-3);
+  padding: 6px 12px;
+  color: $color-black-1;
+  border-radius: $border-radius-5;
+
+  &:enabled:hover {
+    border-color: $color-blue-1;
+  }
+
+  &.active {
+    background-color: $color-blue-13;
+    border-color: $color-blue-1;
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}

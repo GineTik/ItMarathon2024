@@ -1,0 +1,78 @@
+@import 'variables';
+
+:host {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $color-gray-11;
+  border-radius: $border-radius-5;
+
+  &.disabled {
+    background: $color-gray-11 url('/assets/icons/sprite-icons-small.svg#photo') center/32px 32px no-repeat;
+
+    & > .upload-button {
+      display: none;
+    }
+  }
+
+  &.gallery-photo {
+    .upload-button__photo,
+    & {
+      border-radius: $border-radius-2;
+    }
+  }
+}
+
+.upload-button {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  color: $color-blue-1;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+
+  &__photo {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: $border-radius-5;
+  }
+}
+
+.edit-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+}
+
+.remove-button {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: $border-radius-7;
+  background-color: $color-white-1-a-6;
+
+  &__icon {
+    color: $color-blue-1;
+    transform: scale(1.3);
+  }
+
+  &:hover {
+    .remove-button__icon {
+      color: $color-blue-5;
+    }
+  }
+
+  &:active {
+    .remove-button__icon {
+      color: $color-black-4;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<div class="signin-page__wrapper">
+  <div class="signin-page__content-container">
+    <h1 class="hidden">Форма входу</h1>
+    <p class="page-title">Привіт знову!</p>
+    <p class="page-description">Будь ласка, введіть свої дані, щоб увійти </p>
+
+    <form class="signin-page__form">
+      <ul class="signin-page__form-list">
+        <li class="signin-page__form-list-item">
+          <pet-world-input [control]="username" [label]="inputLabels.email" [placeholder]="placeholders.email" />
+        </li>
+        <li class="signin-page__form-list-item">
+          <pet-world-input
+            [control]="password"
+            [label]="inputLabels.password"
+            [inputType]="inputTypes.password"
+            [placeholder]="placeholders.password"
+          />
+        </li>
+        <li class="signin-page__form-list-item signin-page__form-list-item--additional-info">
+          <pet-world-checkbox [control]="confirmCheckboxControl" class="signin-page__confirm-checkbox">
+            <span class="signin-page__confirm-checkbox--text">
+              Запам'ятати мене
+            </span>
+          </pet-world-checkbox>
+          <a class="link" [routerLink]="['/', routingList.auth, routingList.forgotPassword]">Забули пароль?</a>
+        </li>
+      </ul>
+    
+      <pet-world-button class="submit-button" [isDisabled]="!isFormValid" (click)="signIn()">
+        {{ buttonContent.login }}
+      </pet-world-button>
+    </form>
+
+    <p class="action-description">
+      Ще не маєте аккаунту?
+      <a class="link" [routerLink]="['/', routingList.auth, routingList.signUp]">Зареєструватися</a>
+    </p>
+  </div>
+</div>

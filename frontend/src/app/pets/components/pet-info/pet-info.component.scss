@@ -1,0 +1,112 @@
+@import 'mixins';
+@import 'extends';
+
+.pet-details-page {
+  display: grid;
+  grid-template-rows: 584px auto;
+  grid-template-columns: 704px 496px;
+  gap: 48px 24px;
+  color: $color-black-3;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  grid-row: 1 / span 2;
+  grid-column: 2;
+}
+
+.main-header {
+  @include text-sizes($font-size-l-1, $line-height-1, $letter-spacing-2, 600);
+  margin-bottom: 8px;
+}
+
+.price {
+  @include text-sizes($font-size-m-1, $line-height-5, normal, 500);
+}
+
+.secondary-header {
+  @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-2, 500);
+  margin-bottom: 8px;
+}
+
+.contacts {
+  @include key-value-list(pet-contacts);
+
+  .item__name {
+    &--contact::before {
+      content: url('/assets/icons/sprite-icons-small.svg#person');
+    }
+  }
+}
+
+.telegram-link {
+  display: inline-block;
+  margin-left: 8px;
+  vertical-align: bottom;
+}
+
+.pet-details {
+  @include key-value-list(pet-details);
+
+  .item {
+    &__name {
+      &--type::before {
+        content: url('/assets/icons/sprite-icons-small.svg#paw');
+      }
+
+      &--breed::before {
+        content: url('/assets/icons/sprite-icons-small.svg#label');
+      }
+
+      &--sex::before {
+        content: url('/assets/icons/sprite-icons-small.svg#sex');
+      }
+
+      &--age::before {
+        content: url('/assets/icons/sprite-icons-small.svg#calendar');
+      }
+
+      &--color::before {
+        content: url('/assets/icons/sprite-icons-small.svg#drop');
+      }
+
+      &--origin::before {
+        content: url('/assets/icons/sprite-icons-small.svg#house');
+      }
+
+      &--health::before {
+        content: url('/assets/icons/sprite-icons-small.svg#health-shield');
+      }
+
+      &--documents::before {
+        content: url('/assets/icons/sprite-icons-small.svg#document');
+      }
+    }
+
+    &__chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+  }
+}
+
+.action-buttons {
+  display: flex;
+  gap: 24px;
+  justify-content: flex-end;
+  margin-top: 40px;
+
+  &__button {
+    width: 184px;
+    font-weight: 500;
+  }
+}
+
+.additional-info {
+  &__paragraph {
+    @include text-sizes($font-size-s-2, $line-height-1, $letter-spacing-2);
+  }
+}

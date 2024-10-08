@@ -1,0 +1,18 @@
+@import 'mixins';
+
+:host {
+  @include app-main-element(not-found);
+  padding: 236px 0 372px;
+}
+
+.header {
+  @include text-sizes($font-size-l-1, $line-height-2, $letter-spacing-7, 500);
+  width: 600px;
+  margin-bottom: 36px;
+}
+
+.paragraph {
+  @include text-sizes($font-size-s-1, $line-height-4, $letter-spacing-1);
+  width: 600px;
+  margin-bottom: 32px;
+}

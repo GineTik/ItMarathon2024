@@ -1,0 +1,35 @@
+@import 'animations';
+@import 'variables';
+
+:host {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 2000;
+  transform: translate(-50%, -50%);
+}
+
+path:first-child {
+  fill: $color-blue-10;
+  animation: first-loader-step 1.5s infinite;
+}
+
+path:nth-child(2) {
+  fill: $color-blue-10;
+  animation: second-loader-step 1.5s infinite;
+}
+
+path:nth-child(3) {
+  fill: $color-blue-10;
+  animation: third-loader-step 1.5s infinite;
+}
+
+path:nth-child(4) {
+  fill: $color-blue-10;
+  animation: fourth-loader-step 1.5s infinite;
+}
+
+path:last-child {
+  fill: $color-blue-10;
+  animation: fifth-loader-step 1.5s infinite;
+}

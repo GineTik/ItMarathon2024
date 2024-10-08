@@ -1,0 +1,19 @@
+@import 'variables';
+
+.edit-button {
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  background-color: $color-white-2-a-6;
+  border-radius: $border-radius-7;
+
+  &__icon {
+    fill: $color-blue-1;
+  }
+
+  &:hover {
+    .edit-button__icon {
+      fill: $color-blue-5;
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<label class="radio-button__group-label" petWorldLabel [isRequired]="isRequired()">{{ label() }}</label>
+<ul class="radio-button__group">
+  @for (option of optionList(); track option) {
+    <li>
+      <input
+        class="radio-button__input"
+        [formControl]="control()"
+        [id]="displayKey() ? option[displayKey()] : option + valueKey() ? option[valueKey()] : option"
+        type="radio"
+        [value]="valueKey() ? option[valueKey()] : option"
+        [name]="label()"
+      />
+      <label
+        class="radio-button__label"
+        [for]="displayKey() ? option[displayKey()] : option + valueKey() ? option[valueKey()] : option"
+      >
+        {{ displayKey() ? option[displayKey()] : option }}
+      </label>
+    </li>
+  }
+</ul>

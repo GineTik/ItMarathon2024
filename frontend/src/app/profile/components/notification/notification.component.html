@@ -1,0 +1,13 @@
+<pet-world-cross-button class="close-button" />
+
+<p class="notification__paragraph">У Вас не збережені дані. Ви дійсно бажаєте вийти?</p>
+
+<div class="notification__action-container">
+  <pet-world-button class="secondary notification__action-button" (click)="onCancelButton()">
+    {{ buttonContent.no }}
+  </pet-world-button>
+
+  <pet-world-button class="small notification__action-button" (click)="onConfirmButton()">
+    {{ buttonContent.yes }}
+  </pet-world-button>
+</div>

@@ -1,0 +1,67 @@
+@import 'mixins';
+@import 'variables';
+
+:host {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 48px 0 64px;
+}
+
+.signup-page {
+  &__wrapper {
+    @include central-element-wrapper;
+  }
+
+  &__content-container {
+    width: 392px;
+  }
+
+  &__form-list {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-bottom: 25px;
+  }
+
+  &__confirm-checkbox {
+    display: block;
+    margin-bottom: 32px;
+
+    &--text {
+      @include text-sizes($font-size-s-2, $line-height-4, $letter-spacing-2);
+    }
+  }
+}
+
+h1 {
+  @include visually-hidden;
+}
+
+.google,
+.confirm-button {
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+.action-description {
+  @include text-sizes($font-size-s-2, $line-height-4, 0.25px);
+  text-align: center;
+}
+
+.link {
+  @include link-action;
+  @include text-sizes($font-size-s-1, $line-height-4, $letter-spacing-4);
+
+  &--policy {
+    color: $color-blue-16;
+
+    &:hover {
+      color: $color-blue-9;
+    }
+
+    &:active {
+      color: $color-blue-1;
+    }
+  }
+}

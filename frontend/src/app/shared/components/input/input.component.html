@@ -1,0 +1,18 @@
+<label class="input__wrapper" [petWorldLabel]="label()" [isRequired]="isRequired()" [isInvalid]="isInvalid">
+  <input
+    #epmInput
+    class="input"
+    autocomplete="off"
+    [type]="inputType()"
+    [placeholder]="placeholder()"
+    [name]="control()"
+    [formControl]="control()"
+  />
+  @if (inputType() === inputTypes.password) {
+    <button class="input__toggle-visibility" type="button" (click)="onToggleClick(epmInput.type)">
+      <svg height="24" width="24" class="input__toggle-visibility--icon" [ngClass]="{ invalid: isInvalid }">
+        <use [attr.xlink:href]="iconPath" />
+      </svg>
+    </button>
+  }
+</label>

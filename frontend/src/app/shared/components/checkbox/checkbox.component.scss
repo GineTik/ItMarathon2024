@@ -1,0 +1,55 @@
+@import 'mixins';
+@import 'variables';
+
+:host {
+  &.signup-page__confirm-checkbox .checkbox__label::before {
+    margin-top: 2px;
+  }
+}
+
+.checkbox {
+  &__input {
+    position: absolute;
+    z-index: -1;
+    opacity: 0;
+    height: 0;
+    width: 0;
+
+    &:focus-visible {
+      + .checkbox__label::before {
+        box-shadow: 0 0 5px $color-blue-16;
+      }
+    }
+  }
+
+  &__label {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    cursor: pointer;
+
+    &-text {
+      @include text-sizes($font-size-s-1, $line-height-3, $letter-spacing-3);
+      color: $color-black-1;
+      user-select: none;
+    }
+
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      flex-grow: 0;
+      border: 2px solid $color-black-1;
+      border-radius: 2px;
+      background: no-repeat center/12px;
+    }
+  }
+
+  &__input:checked + &__label::before {
+    border-color: $color-blue-1;
+    background-color: $color-blue-1;
+    background-image: url('/assets/icons/checkmark.svg');
+  }
+}

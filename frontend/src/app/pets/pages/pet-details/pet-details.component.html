@@ -1,0 +1,25 @@
+@if (isUserOwned && isEditMode) {
+  <pet-world-edit-ad-form
+    #editForm
+    [proposal]="proposal"
+    [isUserOwned]="isUserOwned"
+    [animalTypes]="animalTypes"
+    [genderList]="genderList"
+    [colorList]="colorList"
+    [healthList]="healthList"
+    [documentList]="documentList"
+    (isEditProposalFormValid)="checkFormValidity($event)"
+  />
+} @else {
+  <pet-world-pet-info [proposal]="proposal" [isUserOwned]="isUserOwned" />
+}
+
+@if (isUserOwned) {
+  <pet-world-pet-view-buttons
+    [cancelButton]="cancelButtonText"
+    [submitButton]="isEditMode ? buttonContent.save : buttonContent.edit"
+    [isDisabled]="isEditMode && !isEditFormValid"
+    (submit)="onSubmit()"
+    (cancel)="onCancel()"
+  />
+}

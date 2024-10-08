@@ -1,0 +1,122 @@
+@import 'variables';
+
+@keyframes first-loader-step {
+  0% {
+    fill: $color-pink-2;
+  }
+  16% {
+    fill: $color-pink-2;
+  }
+  17% {
+    fill: $color-purple-6;
+  }
+  100% {
+    fill: $color-purple-6;
+  }
+}
+
+@keyframes second-loader-step {
+  0% {
+    fill: $color-pink-2;
+  }
+  32% {
+    fill: $color-pink-2;
+  }
+  33% {
+    fill: $color-purple-6;
+  }
+  100% {
+    fill: $color-purple-6;
+  }
+}
+
+@keyframes third-loader-step {
+  0% {
+    fill: $color-pink-2;
+  }
+  48% {
+    fill: $color-pink-2;
+  }
+  49% {
+    fill: $color-purple-6;
+  }
+  100% {
+    fill: $color-purple-6;
+  }
+}
+
+@keyframes fourth-loader-step {
+  0% {
+    fill: $color-pink-2;
+  }
+  64% {
+    fill: $color-pink-2;
+  }
+  65% {
+    fill: $color-purple-6;
+  }
+  100% {
+    fill: $color-purple-6;
+  }
+}
+
+@keyframes fifth-loader-step {
+  0% {
+    fill: $color-pink-2;
+  }
+  80% {
+    fill: $color-pink-2;
+  }
+  81% {
+    fill: $color-purple-6;
+  }
+  100% {
+    fill: $color-purple-6;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+
+  10% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+
+  20% {
+    transform: translate(-3px, 0) rotate(1deg);
+  }
+
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+
+  50% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+
+  90% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+
+  100% {
+    transform: translate(1px, -2px) rotate(1deg);
+  }
+}

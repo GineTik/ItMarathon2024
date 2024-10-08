@@ -1,0 +1,155 @@
+<h1 class="hidden">Редагування оголошення</h1>
+
+<div class="edit-pet-details__left">
+  <div class="gallery">
+    <pet-world-gallery
+      [photos]="photos.value"
+      [isEditMode]="true"
+      (editPhoto)="onEditPhoto($event)"
+      (drag)="onDrag($event)"
+      (removePhoto)="onRemovePhoto($event)"
+    />
+  </div>
+  <section class="edit-pet-details__summary">
+    <pet-world-textarea
+      [label]="labelTypes.summary"
+      [control]="summary"
+      [isCounterVisible]="true"
+      [symbolCounter]="summaryLength"
+      [placeholder]="placeholders.summary"
+      [maxLength]="summaryMaxLength"
+      [height]="summaryHeight"
+    />
+  </section>
+</div>
+
+<div class="edit-pet-details__right">
+  <pet-world-textarea
+    class="spacing-m"
+    [label]="labelTypes.title"
+    [control]="title"
+    [isCounterVisible]="true"
+    [symbolCounter]="titleLength"
+    [placeholder]="placeholders.title"
+  />
+
+  <div class="animal-price">
+    <pet-world-input
+      [inputType]="inputTypes.number"
+      [control]="price"
+      [label]="labelTypes.price"
+      [placeholder]="placeholders.price"
+    />
+
+    <pet-world-checkbox [control]="freeSaleCheckbox">
+      {{ labelTypes.free }}
+    </pet-world-checkbox>
+  </div>
+
+  <section class="edit-pet-details__properties">
+    <h2 class="secondary-header">Характеристики</h2>
+
+    <pet-world-select
+      class="spacing-m"
+      [keyValue]="dropdownKey"
+      [control]="animalType"
+      [label]="labelTypes.animalType"
+      [dropdown]="animalTypes()"
+      [placeholder]="placeholders.animalType"
+      [isVirtualScroll]="false"
+      [isSearchable]="false"
+    />
+
+    <pet-world-select
+      class="spacing-s"
+      [keyValue]="dropdownKey"
+      [control]="breed"
+      [label]="labelTypes.breed"
+      [dropdown]="breeds"
+      [placeholder]="placeholders.breed"
+      [disabled]="!animalType.value"
+    />
+
+    <pet-world-radio-button
+      class="horizontal spacing-m"
+      [control]="sex"
+      [optionList]="genderList()"
+      displayKey="value"
+      [label]="labelTypes.sex"
+      [isRequired]="true"
+    />
+
+    <div class="age__wrapper spacing-m">
+      <pet-world-input
+        class="age-number"
+        [inputType]="inputTypes.number"
+        [control]="age"
+        [label]="labelTypes.age"
+        [placeholder]="placeholders.age"
+      />
+
+      <pet-world-select
+        class="age-unit"
+        keyValue="type"
+        [control]="ageUnit"
+        [dropdown]="periodTypes"
+        [placeholder]="placeholders.period"
+        [isVirtualScroll]="false"
+        [isSearchable]="false"
+      />
+    </div>
+
+    <pet-world-select
+      class="spacing-m"
+      [keyValue]="dropdownKey"
+      [control]="color"
+      [label]="labelTypes.color"
+      [dropdown]="colorList()"
+      [placeholder]="placeholders.chooseColor"
+    />
+
+    <pet-world-select
+      class="spacing-s"
+      [control]="location"
+      [label]="labelTypes.location"
+      [dropdown]="cityList"
+      [placeholder]="placeholders.location"
+    />
+
+    <pet-world-radio-button
+      class="horizontal spacing-s"
+      [control]="petOrigin"
+      [optionList]="petOriginOptionList"
+      [label]="labelTypes.petOrigin"
+      displayKey="label"
+      valueKey="value"
+      [isRequired]="true"
+    />
+
+    <div class="chips__wrapper spacing-s">
+      <p class="chips__label">Здоровʼя</p>
+      <div class="chips__list">
+        @for (chips of healthList(); track chips) {
+          <pet-world-chips
+            [content]="chips"
+            [isActive]="chips | isChipsActive: health.value"
+            (click)="toggleChipsList(chips, 'health')"
+          />
+        }
+      </div>
+    </div>
+
+    <div class="chips__wrapper">
+      <p class="chips__label">Документи</p>
+      <div class="chips__list">
+        @for (chips of documentList(); track chips) {
+          <pet-world-chips
+            [content]="chips"
+            [isActive]="chips | isChipsActive: documents.value"
+            (click)="toggleChipsList(chips, 'documents')"
+          />
+        }
+      </div>
+    </div>
+  </section>
+</div>

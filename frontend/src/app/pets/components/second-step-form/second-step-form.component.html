@@ -1,0 +1,63 @@
+<div class="control__wrapper">
+  <pet-world-select
+    [keyValue]="dropdownKey()"
+    [control]="breed"
+    [label]="labelTypes.breed"
+    [dropdown]="breedList()"
+    [placeholder]="placeholders.breed"
+  />
+
+  <div class="age__wrapper">
+    <pet-world-input
+      class="age-number"
+      [inputType]="inputTypes.number"
+      [control]="age"
+      [label]="labelTypes.age"
+      [placeholder]="placeholders.age"
+    />
+
+    <pet-world-select
+      class="age-unit"
+      keyValue="type"
+      [control]="ageUnit"
+      [label]="labelTypes.age"
+      [dropdown]="periodTypes"
+      [placeholder]="placeholders.period"
+      [isVirtualScroll]="false"
+    />
+  </div>
+
+  <pet-world-radio-button
+    [control]="sex"
+    [optionList]="genderList()"
+    [displayKey]="dropdownKey()"
+    [label]="labelTypes.sex"
+    [isRequired]="true"
+  />
+
+  <div class="chips__wrapper">
+    <p class="chips__label">Здоровʼя</p>
+    <div class="chips__list">
+      @for (chips of healthList(); track chips) {
+        <pet-world-chips
+          [content]="chips"
+          [isActive]="chips | isChipsActive: health.value"
+          (click)="toggleChipsList(chips, formControlName.health)"
+        />
+      }
+    </div>
+  </div>
+
+  <div class="chips__wrapper">
+    <p class="chips__label">Документи</p>
+    <div class="chips__list">
+      @for (chips of documentList(); track chips) {
+        <pet-world-chips
+          [content]="chips"
+          [isActive]="chips | isChipsActive: documents.value"
+          (click)="toggleChipsList(chips, formControlName.documents)"
+        />
+      }
+    </div>
+  </div>
+</div>

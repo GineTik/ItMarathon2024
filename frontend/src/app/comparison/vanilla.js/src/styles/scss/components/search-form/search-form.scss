@@ -1,0 +1,9 @@
+.search-form {
+  display: flex;
+  gap: 16px;
+  align-items: end;
+
+  &__select {
+    width: 244px;
+  }
+}

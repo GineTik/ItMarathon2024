@@ -1,0 +1,15 @@
+<label class="input__wrapper" [petWorldLabel]="label()" [isRequired]="isRequired()" [isInvalid]="isInvalid">
+  <textarea
+    class="input"
+    [ngStyle]="{ height: height() }"
+    [maxlength]="maxLength()"
+    [rows]="rows()"
+    [placeholder]="placeholder()"
+    [name]="control()"
+    [formControl]="control()"
+  ></textarea>
+
+  @if (isCounterVisible()) {
+    <span class="input__counter">{{ symbolCounter() }}/{{ maxLength() }}</span>
+  }
+</label>

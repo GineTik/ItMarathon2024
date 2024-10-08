@@ -1,0 +1,11 @@
+<pet-world-header />
+
+<router-outlet />
+
+<pet-world-footer />
+
+<pet-world-loader />
+
+@if (showToaster()) {
+  <pet-world-toaster [type]="toasterType()" [message]="toasterMessage()" />
+}

@@ -1,0 +1,48 @@
+<div class="modal__wrapper">
+  <div class="modal__header">
+    <h2 class="modal__title">Оберіть файл з вашого компʼютера:</h2>
+    <pet-world-cross-button (click)="onClose()" />
+  </div>
+
+  @if (!imageChangedEvent() && !imageFile()) {
+    <div class="drop-area" petWorldDnd (fileDropped)="onFileDropped($event)">
+      <span class="drop-area__hint">Перетягніть файл сюди</span>
+      <span class="drop-area__separator">або</span>
+      <label class="drop-area__link">
+        <input class="drop-area__input" type="file" accept=".png, .jpg, .jpeg" (change)="fileChangeEvent($event)" />
+        Додати файл
+      </label>
+    </div>
+  } @else {
+    <image-cropper
+      #cropper
+      [imageChangedEvent]="imageChangedEvent()"
+      [imageFile]="imageFile()"
+      [maintainAspectRatio]="true"
+      [containWithinAspectRatio]="false"
+      [aspectRatio]="4 / 3"
+      [resizeToWidth]="700"
+      [resizeToHeight]="500"
+      [roundCropper]="false"
+      format="png"
+      [autoCrop]="false"
+    />
+  }
+
+  <div class="modal__footer">
+    <ul class="file-requirements__list">
+      <li class="file-requirements__item">
+        <span class="file-requirements__property">Максимальний розмір: </span>
+        <span class="file-requirements__value">1МБ</span>
+      </li>
+      <li class="file-requirements__item">
+        <span class="file-requirements__property">Формат фотографій: </span>
+        <span class="file-requirements__value">jpg та png</span>
+      </li>
+    </ul>
+
+    <pet-world-button class="small" (click)="onConfirm()" [isDisabled]="!imageChangedEvent() && !imageFile()">
+      Підтвердити
+    </pet-world-button>
+  </div>
+</div>

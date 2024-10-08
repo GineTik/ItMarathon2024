@@ -1,0 +1,28 @@
+<div class="confirmation-page__wrapper">
+  <div class="confirmation-page__content-container">
+    <h1 class="page-title">Введіть код</h1>
+
+    <p class="page-description">Ми надіслали Вам лист з тимчасовим кодом на пошту</p>
+
+    <div class="code__wrapper">
+      @for (control of confirmationCodeForm.controls; track $index) {
+        <pet-world-confirmation-code-item [control]="control | convertToFormControl" />
+      }
+    </div>
+
+    <pet-world-button class="page-button" [isDisabled]="!isFormValid">
+      {{ buttonContent.sendPassword }}
+    </pet-world-button>
+
+    @if (counter()) {
+      <p class="counter-description">
+        Не отримали код? <span class="highlighted-text">00:{{ counter() | normalizeTimer }}</span> секунд
+      </p>
+    } @else {
+      <!--      TODO: implement logic to repeat request on BE -->
+      <p class="action-description">
+        Не отримали код? <button class="highlighted-text repeat-code__button">Надіслати код ще раз</button>
+      </p>
+    }
+  </div>
+</div>

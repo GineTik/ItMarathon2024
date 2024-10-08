@@ -1,0 +1,55 @@
+<!-- TODO: add actual data -->
+<div class="profile-page app-container">
+  <div class="heading">
+    <!--    TODO: remove handler-->
+    <h1 class="main-header" (click)="toggleClass()">{{ user()?.name }} {{ user()?.surname }}</h1>
+    <!-- TODO: add onClick prop -->
+    <button class="edit-profile-button">Редагувати профіль</button>
+
+    <pet-world-notification #notification />
+  </div>
+
+  <pet-world-user-info [user]="user()" />
+
+  <section class="ads-section">
+    <h2 class="ads-section__header">Оголошення</h2>
+
+    <!-- TODO: add 'active' class dynamically -->
+    <!-- TODO: add ad counter dynamically: (4), (1) -->
+    <!-- TODO: add onClick props -->
+    <menu class="tab-panel">
+      <li>
+        <button class="tab-panel__button active">Активні (4)</button>
+      </li>
+      <li>
+        <button class="tab-panel__button">Неактивні (1)</button>
+      </li>
+    </menu>
+
+    <!-- TODO: add '.empty-block' or next <ul> + <button> blocks dynamically -->
+    <!-- <div class="empty-block">
+      <svg width="80" height="80">
+        <use xlink:href="/assets/icons/sprite-icons-medium.svg#no-pictures" />
+      </svg> -->
+    <!-- TODO: add paragraph [or words: 'ще', 'не'] dynamically [depending on 'active'/'inactive' tab] -->
+    <!-- <p class="empty-block__paragraph">У Вас ще немає активних оголошень</p> -->
+    <!-- <p class="empty-block__paragraph">У Вас немає неактивних оголошень</p> -->
+    <!-- TODO: add button dynamically [only for 'Активні' tab] -->
+    <!-- TODO: add necessary properties + onClick prop -->
+    <!-- <pet-world-button class="add">{{ buttonContent.addAnnouncement }}</pet-world-button>
+    </div> -->
+
+    <!-- TODO: add necessary props to pet-card component -->
+    <ul class="user-ads">
+      @for (card of proposals$ | async; track card.id) {
+        <li>
+          <pet-world-pet-card [petCard]="card" (click)="onProposal(card.id)" />
+        </li>
+      }
+    </ul>
+
+    <!-- TODO: add button dynamically [if there're more than 4 ads] -->
+    <!-- TODO: add necessary properties + onClick to button -->
+    <pet-world-button class="show-more">{{ buttonContent.showMore }}</pet-world-button>
+  </section>
+</div>

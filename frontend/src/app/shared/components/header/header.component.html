@@ -1,0 +1,34 @@
+<header class="header app-container">
+  <nav class="nav-header">
+    <ul class="header-links">
+      <li>
+        <ul class="main-links">
+          <li>
+            <!-- TODO: add actual href -->
+            <a href="#" title="На головну">
+              <svg width="178" height="46">
+                <use xlink:href="/assets/icons/sprite-logotypes.svg#header-logo" />
+              </svg>
+            </a>
+          </li>
+          <!-- TODO: add element dynamically [based on the route] -->
+          <li>
+            <a class="link-ads" [routerLink]="routingList.pets">Оголошення</a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <ul class="side-links">
+          <li>
+            <pet-world-button class="add" [routerLink]="['/', routingList.pets, routingList.newPet]">
+              {{ buttonContent.addAnnouncement }}
+            </pet-world-button>
+          </li>
+          <li>
+            <a class="link-profile" [routerLink]="routingList.me">{{ user()?.name || 'Акаунт' }}</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+</header>

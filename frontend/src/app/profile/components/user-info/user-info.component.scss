@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  display: block;
+  width: 536px;
+}
+
+.user-info {
+  @include key-value-list(profile);
+
+  &.error {
+    .user-info__item:last-child {
+      border-bottom-width: 1px;
+      border-bottom-color: $color-red-2;
+    }
+  }
+
+  .item__name {
+    &--email::before {
+      content: url('/assets/icons/sprite-icons-small.svg#mail');
+    }
+  }
+}
+
+.no-email-paragraph {
+  @include text-sizes($font-size-s-4, $line-height-4, $letter-spacing-2);
+  color: $color-red-2;
+  text-align: right;
+}
+
+.required::after {
+  content: '*';
+  position: relative;
+  right: 8px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  color: $color-red-2;
+}

@@ -1,0 +1,5 @@
+@import 'mixins';
+
+:host {
+  @include app-main-element(paws);
+}

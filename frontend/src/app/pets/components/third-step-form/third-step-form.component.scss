@@ -1,0 +1,47 @@
+@import 'variables';
+@import 'extends';
+@import 'mixins';
+
+.control__wrapper {
+  @include form-wrapper;
+  @include form-wrapper-stepper;
+}
+
+.photo {
+  @include custom-control;
+
+  &__description {
+    @include text-sizes($font-size-s-4, $line-height-3, $letter-spacing-3);
+  }
+}
+
+.uploader {
+  height: 92px;
+  width: 92px;
+
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 8px;
+  }
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: $border-radius-5;
+  box-shadow:
+    0 1px 3px 0 $color-black-3-a-3,
+    0 4px 8px 3px $color-black-3-a-15;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.uploader__wrapper.cdk-drop-list-dragging .uploader:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}

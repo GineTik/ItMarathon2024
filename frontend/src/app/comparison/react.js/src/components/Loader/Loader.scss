@@ -1,0 +1,34 @@
+@import '../../styles/variables.scss';
+@import '../../styles/animations.scss';
+
+.loader {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  &__item:first-child {
+    fill: $color-blue-10;
+    animation: first-loader-step 4.8s infinite;
+  }
+
+  &__item:nth-child(2) {
+    fill: $color-blue-10;
+    animation: second-loader-step 4.8s infinite;
+  }
+
+  &__item:nth-child(3) {
+    fill: $color-blue-10;
+    animation: third-loader-step 4.8s infinite;
+  }
+
+  &__item:nth-child(4) {
+    fill: $color-blue-10;
+    animation: fourth-loader-step 4.8s infinite;
+  }
+
+  &__item:last-child {
+    fill: $color-blue-10;
+    animation: fifth-loader-step 4.8s infinite;
+  }
+}

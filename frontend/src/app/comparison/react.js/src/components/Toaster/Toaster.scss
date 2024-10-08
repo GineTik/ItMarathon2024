@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.toast-wrapper {
+  position: fixed;
+  z-index: 1049;
+  top: 128px;
+  width: 100%;
+}
+
+.toast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  width: fit-content;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  border: 1px solid;
+  border-radius: 28px;
+
+  &.error {
+    background-color: $color-red-4;
+    border-color: $color-red-5;
+  }
+
+  &.warning {
+    background-color: $color-red-6;
+    border-color: $color-red-7;
+  }
+
+  .message {
+    @include text-sizes($font-size-s-3, $line-height-4, $letter-spacing-2);
+  }
+
+  .close-button {
+    use {
+      scale: 0.75;
+    }
+  }
+}

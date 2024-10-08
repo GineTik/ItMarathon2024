@@ -1,0 +1,6 @@
+@import 'mixins';
+
+:host {
+  @include app-main-element(paws);
+  padding: 48px 108px 64px;
+}

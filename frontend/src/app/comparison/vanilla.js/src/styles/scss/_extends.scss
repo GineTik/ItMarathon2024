@@ -1,0 +1,11 @@
+%app-main-element {
+  flex-grow: 1;
+  margin: 0 auto;
+  margin-top: $main-header-height;
+}
+
+%app-paws-background {
+  background:
+    url('/assets/backgrounds/paws.svg') right -16px top -16px no-repeat,
+    url('/assets/backgrounds/paws.svg') left 0 bottom -16px no-repeat;
+}

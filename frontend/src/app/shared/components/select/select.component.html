@@ -1,0 +1,20 @@
+<ng-select
+  class="select"
+  notFoundText="Нічого не знайдено"
+  [virtualScroll]="isVirtualScroll()"
+  [formControl]="control()"
+  [placeholder]="placeholder()"
+  [items]="dropdown()"
+  [bindLabel]="keyValue()"
+  [petWorldLabel]="label()"
+  [isRequired]="isRequired()"
+  [searchable]="isSearchable()"
+  [isInvalid]="isInvalid"
+>
+  <ng-template ng-label-tmp let-item="item">
+    <span class="single-value">
+      <span class="ng-value-icon left" aria-hidden="true">×</span>
+      {{ item?.[keyValue()] || item }}
+    </span>
+  </ng-template>
+</ng-select>

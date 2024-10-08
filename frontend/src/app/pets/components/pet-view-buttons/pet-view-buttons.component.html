@@ -1,0 +1,6 @@
+<pet-world-button class="secondary button" (click)="onCancel()">
+  {{ cancelButton() }}
+</pet-world-button>
+<pet-world-button class="small button" (click)="onSubmit()" [isDisabled]="isDisabled()">
+  {{ submitButton() }}
+</pet-world-button>

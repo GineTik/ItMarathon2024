@@ -1,0 +1,40 @@
+<div class="control__wrapper">
+  <pet-world-select
+    [keyValue]="dropdownKey()"
+    [control]="color"
+    [label]="labelTypes.color"
+    [dropdown]="colorList()"
+    [placeholder]="placeholders.chooseColor"
+  />
+
+  <pet-world-textarea
+    [label]="labelTypes.summary"
+    [control]="summary"
+    [isCounterVisible]="true"
+    [symbolCounter]="summaryLength"
+    [placeholder]="placeholders.summary"
+    [maxLength]="summaryMaxLength"
+    [height]="summaryHeight"
+  />
+
+  <div class="photo__wrapper">
+    <p class="photo__label">Фото</p>
+    <p class="photo__description">Перше фото буде на обкладинці оголошення, перетягніть, щоб змінити порядок фото</p>
+
+    <div class="uploader__wrapper" cdkDropList (cdkDropListDropped)="drop($event)" cdkDropListOrientation="horizontal">
+      @for (photo of photoConfig; track $index) {
+        <pet-world-photo-uploader
+          class="uploader"
+          [ngClass]="{ disabled: $index && !photoConfig[$index - 1]() }"
+          [controlIndex]="$index"
+          [image]="photo()"
+          (clickPhoto)="onAddPhoto($event)"
+          (removePhoto)="onRemovePhoto($event)"
+          cdkDrag
+          [cdkDragDisabled]="!photoConfig[$index]()"
+          cdkDragLockAxis="x"
+        />
+      }
+    </div>
+  </div>
+</div>

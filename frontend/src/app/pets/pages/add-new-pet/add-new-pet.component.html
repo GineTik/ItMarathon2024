@@ -1,0 +1,62 @@
+<div class="page__wrapper">
+  <div class="content-container">
+    <p class="step-counter">Крок {{ currentStep.stepNumber }}</p>
+    <h1 class="page-title">{{ currentStep.title }}</h1>
+
+    <!--    TODO: add logic later-->
+    <progress [value]="currentStep.progress" max="100"></progress>
+
+    @switch (currentStepNumber) {
+      @case (1) {
+        <pet-world-second-step-form
+          #secondStep
+          [breedList]="breeds"
+          [genderList]="genderList"
+          [dropdownKey]="dropdownKey"
+          [healthList]="healthList"
+          [documentList]="documentList"
+          (isSecondStepFormValid)="checkFormValidity($event)"
+        />
+      }
+      @case (2) {
+        <pet-world-third-step-form
+          #thirdStep
+          [colorList]="colorList"
+          [dropdownKey]="dropdownKey"
+          (isThirdStepFormValid)="checkFormValidity($event)"
+        />
+      }
+      @default {
+        <pet-world-first-step-form
+          #firstStep
+          [animalTypes]="animalTypes"
+          [dropdownKey]="dropdownKey"
+          (chosenPetType)="getBreeds($event)"
+          (isFirstStepFormValid)="checkFormValidity($event)"
+        />
+      }
+    }
+
+    <div
+      class="button__wrapper"
+      [ngStyle]="{
+        'justify-content': currentStepNumber ? 'space-between' : 'flex-end',
+        'margin-bottom': isLastPage ? '16px' : 0,
+      }"
+    >
+      @if (currentStepNumber) {
+        <pet-world-button class="secondary button" (click)="decreaseStep()">Назад</pet-world-button>
+      }
+
+      <pet-world-button class="small button" (click)="increaseStep()" [isDisabled]="!isActiveFormValid">
+        {{ isLastPage ? 'Опублікувати' : 'Вперед' }}
+      </pet-world-button>
+    </div>
+
+    @if (isLastPage) {
+      <div class="preview-link__wrapper">
+        <a class="preview-link" (click)="onPreview()">Попередній перегляд</a>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="control__wrapper">
+  <pet-world-textarea
+    [label]="labelTypes.title"
+    [control]="title"
+    [isCounterVisible]="true"
+    [symbolCounter]="titleLength"
+    [placeholder]="placeholders.title"
+  />
+
+  <pet-world-select
+    [keyValue]="dropdownKey()"
+    [control]="animalType"
+    [label]="labelTypes.animalType"
+    [dropdown]="animalTypes()"
+    [placeholder]="placeholders.animalType"
+    [isVirtualScroll]="false"
+  />
+
+  <div class="animal-price">
+    <pet-world-input
+      [inputType]="inputTypes.number"
+      [control]="price"
+      [label]="labelTypes.price"
+      [placeholder]="placeholders.price"
+    />
+
+    <pet-world-checkbox [control]="freeSaleCheckbox">
+      {{ labelTypes.free }}
+    </pet-world-checkbox>
+  </div>
+
+  <pet-world-select
+    [control]="location"
+    [label]="labelTypes.location"
+    [dropdown]="cityList"
+    [placeholder]="placeholders.location"
+  />
+
+  <pet-world-radio-button
+    [control]="petOrigin"
+    [optionList]="petOriginOptionList"
+    [label]="labelTypes.petOrigin"
+    displayKey="label"
+    valueKey="value"
+  />
+</div>

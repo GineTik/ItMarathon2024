@@ -1,0 +1,177 @@
+@import 'variables';
+@import 'mixins';
+
+:host {
+  &.horizontal {
+    .pet-card {
+      flex-direction: row;
+      width: 912px;
+      height: 208px;
+
+      &:hover {
+        .photo {
+          border-right-color: $color-purple-4;
+        }
+      }
+    }
+
+    .photo__wrapper {
+      width: 288px;
+      height: 208px;
+    }
+
+    .photo {
+      border-bottom: unset;
+      border-right: $border-1;
+    }
+
+    .description {
+      grid-template-columns: 1fr 168px;
+      grid-template-rows: 48px auto max-content;
+      row-gap: 16px;
+      width: 624px;
+      padding: 24px;
+    }
+
+    .title {
+      letter-spacing: $letter-spacing-2;
+    }
+
+    .price {
+      grid-column: 2;
+      grid-row: 1;
+      margin: 0;
+    }
+
+    .description-text {
+      @include text-sizes($font-size-s-1, $line-height-5, $letter-spacing-5);
+      @include text-overflow(normal);
+      display: block;
+      grid-column: 1 / span 2;
+      grid-row: 2;
+      color: $color-black-5;
+    }
+
+    .details {
+      grid-column: 1 / span 2;
+      grid-row: 3;
+      flex-direction: row;
+      gap: 32px;
+      margin: 0;
+
+      &__item {
+        &--location {
+          order: 1;
+          width: 218px;
+        }
+
+        &--sex,
+        &--age {
+          width: 120px;
+        }
+      }
+    }
+  }
+}
+
+.pet-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 288px;
+  height: 484px;
+  border: $border-1;
+  border-radius: $border-radius-3;
+  overflow: hidden;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $color-purple-5;
+    border-color: $color-purple-4;
+
+    .photo {
+      border-bottom-color: $color-purple-4;
+    }
+  }
+}
+
+.edit-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-bottom: $border-1;
+}
+
+.description {
+  display: grid;
+  grid-template-columns: 1fr;
+  flex-grow: 1;
+  padding: 16px;
+}
+
+.title {
+  @include text-sizes($font-size-s-3, $line-height-1, $letter-spacing-1, 500);
+  @include text-overflow(normal);
+  height: 48px;
+  color: $color-black-5;
+}
+
+.details {
+  @include text-sizes($font-size-s-2, $line-height-4, $letter-spacing-4);
+  @include text-overflow;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 16px;
+  color: $color-black-1;
+
+  &__item {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+
+    &::before {
+      width: 24px;
+      height: 24px;
+    }
+
+    &--location::before {
+      @include icon-mask-background(location);
+      content: '';
+      background-color: $color-blue-6;
+    }
+
+    &--sex::before {
+      @include icon-mask-background(sex);
+      content: '';
+      background-color: $color-blue-6;
+    }
+
+    &--age::before {
+      @include icon-mask-background(calendar);
+      content: '';
+      background-color: $color-blue-6;
+    }
+  }
+}
+
+.price {
+  @include text-sizes($font-size-m-1, $line-height-5, normal, 500);
+  @include text-overflow;
+  margin-top: 8px;
+  text-align: right;
+  color: $color-black-6;
+  word-break: break-all;
+}
+
+.photo__wrapper {
+  width: 288px;
+  height: 272px;
+  background: #e9e9e9 url(/assets/icons/sprite-icons-small.svg#photo) center/32px 32px no-repeat;
+}

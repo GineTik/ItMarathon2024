@@ -1,0 +1,66 @@
+<div class="signup-page__wrapper">
+  <div class="signup-page__content-container">
+    <h1 class="hidden">Форма реєстрації</h1>
+    <p class="page-title">Привіт!</p>
+    <p class="page-description">Будь ласка введіть свої дані, щоб зареєструватися</p>
+
+    <form class="signup-page__form">
+      <ul class="signup-page__form-list">
+        <li class="signup-page__form-list-item">
+          <pet-world-input [control]="name" [label]="inputLabels.name" [placeholder]="placeholders.name" />
+        </li>
+        <li class="signup-page__form-list-item">
+          <pet-world-input [control]="surname" [label]="inputLabels.surname" [placeholder]="placeholders.surname" />
+        </li>
+        <li class="signup-page__form-list-item">
+          <pet-world-select
+            [control]="location"
+            [label]="inputLabels.location"
+            [dropdown]="cityList"
+            [placeholder]="placeholders.location"
+          />
+        </li>
+        <li class="signup-page__form-list-item">
+          <pet-world-input
+            [control]="email"
+            [label]="inputLabels.email"
+            [inputType]="inputTypes.email"
+            [placeholder]="placeholders.email"
+          />
+        </li>
+        <li class="signup-page__form-list-item">
+          <pet-world-input
+            [control]="password"
+            [label]="inputLabels.password"
+            [inputType]="inputTypes.password"
+            [placeholder]="placeholders.password"
+          />
+        </li>
+        <li class="signup-page__form-list-item">
+          <pet-world-input
+            [control]="confirmPassword"
+            [label]="inputLabels.confirmPassword"
+            [inputType]="inputTypes.password"
+            [placeholder]="placeholders.confirmPassword"
+          />
+        </li>
+      </ul>
+
+      <pet-world-checkbox [control]="confirmCheckboxControl" class="signup-page__confirm-checkbox">
+        <!-- TODO: add actual link to the policy -->
+        <span class="signup-page__confirm-checkbox--text">
+          Я погоджуюся з
+          <a class="link link--policy" [routerLink]="'#'">Політикою конфіденційності та Правилами користування</a>
+        </span>
+      </pet-world-checkbox>
+
+      <pet-world-button class="confirm-button" [isDisabled]="!isFormValid" (click)="signUp()">
+        {{ buttonContent.register }}
+      </pet-world-button>
+    </form>
+
+    <p class="action-description">
+      Вже маєте аккаунт? <a class="link" [routerLink]="['/', routingList.auth, routingList.signIn]">Вхід</a>
+    </p>
+  </div>
+</div>

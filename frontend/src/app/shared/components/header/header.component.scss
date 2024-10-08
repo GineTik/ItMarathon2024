@@ -1,0 +1,82 @@
+@import 'variables';
+
+:host {
+  position: fixed;
+  top: 0;
+  z-index: 1100;
+  width: 100%;
+  height: $main-header-height;
+  padding: 24px 108px;
+  min-width: fit-content;
+  background-color: $color-white-1;
+  border-bottom: 1px solid $color-gray-2;
+}
+
+.header {
+  display: flex;
+  font-size: $font-size-s-3;
+  color: $color-black-4;
+}
+
+.nav-header {
+  display: flex;
+  flex-grow: 1;
+}
+
+.header-links {
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+.main-links {
+  display: flex;
+  gap: 40px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.side-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.link-ads {
+  line-height: 24px;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-blue-7;
+  }
+
+  &:active {
+    color: $color-blue-8;
+  }
+}
+
+.link-profile {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  line-height: 20px;
+  letter-spacing: $letter-spacing-7;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-blue-1;
+  }
+
+  &:active {
+    color: $color-blue-2;
+  }
+
+  &::before {
+    content: url('/assets/icons/sprite-icons-small.svg#avatar-placeholder');
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+}

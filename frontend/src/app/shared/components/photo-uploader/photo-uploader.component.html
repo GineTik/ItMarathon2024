@@ -1,0 +1,17 @@
+@if (showEditButton() && !image()) {
+  <pet-world-edit-button class="edit-button" (click)="onClickEditButton()" />
+}
+<button class="upload-button" (click)="onClickPhoto()">
+  @if (image()) {
+    <img class="upload-button__photo" [src]="image()" alt="pet photo" width="92" height="92" />
+    @if (!previewMode()) {
+      <button class="remove-button" (click)="onClickRemoveButton($event)">
+        <svg class="remove-button__icon" width="24" height="24" viewBox="0 0 32 32">
+          <use xlink:href="/assets/icons/sprite-icons-small.svg#cross" />
+        </svg>
+      </button>
+    }
+  } @else {
+    Додати
+  }
+</button>

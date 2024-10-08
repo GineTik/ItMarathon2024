@@ -1,0 +1,194 @@
+# 'Allow scripts to access the OAuth token' was selected in pipeline.  Add the following YAML to any steps requiring access:
+#       env:
+#           MY_ACCESS_TOKEN: $(System.AccessToken)
+# Variable 'agent.ip.firewall.rule.name' was defined in the Variables tab
+# Variable 'dotnet.url' was defined in the Variables tab
+# Variable 'env' was defined in the Variables tab
+# Variable 'screenshots.base.url' was defined in the Variables tab
+# Variable 'solution.directory' was defined in the Variables tab
+# Variable 'specflow.livingdoc.dir' was defined in the Variables tab
+# Variable 'specflow.livingdoc.filename' was defined in the Variables tab
+# Variable 'specflow.livingdoc.html.path' was defined in the Variables tab
+# Variable 'specflow.livingdoc.screenshots.path' was defined in the Variables tab
+# Variable 'specflow.screenshots.artifact.name' was defined in the Variables tab
+# Variable Group 'dotnet-ci-configurations' was defined in the Variables tab
+variables:
+- name: BuildParameters.projects
+  value: $(solution.directory)/*.sln
+trigger:
+  branches:
+    include:
+    - azure-pipelines
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/main
+jobs:
+- job: Job_1
+  displayName: Build
+  pool:
+    vmImage: ubuntu-latest
+  steps:
+  - checkout: self
+    clean: true
+    fetchTags: false
+    persistCredentials: True
+  - task: Bash@3
+    displayName: Echo Specflow Screenshots Artifact URL
+    inputs:
+      targetType: inline
+      script: echo "$SCREENSHOTS_BASE_URL"
+  - task: Bash@3
+    displayName: Install Chrome on Linux
+    condition: and(succeeded(), eq(variables['Agent.OS'], 'Linux'))
+    inputs:
+      targetType: inline
+      script: >-
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo apt-get install ./google-chrome-stable_current_amd64.deb -y
+  - task: PowerShell@2
+    displayName: Update Chrome on Windows
+    condition: and(succeeded(), eq(variables['Agent.OS'], 'Windows_NT'))
+    inputs:
+      targetType: inline
+      script: choco upgrade googlechrome -y
+  - task: Bash@3
+    name: Agent
+    displayName: Get Agent IP
+    inputs:
+      targetType: inline
+      script: >
+        AGENT_IP=$(curl -s ifconfig.me)
+        export AGENT_IP
+        echo "Agent IP is $AGENT_IP"
+        echo "##vso[task.setvariable variable=AGENT_IP]$AGENT_IP"
+  - task: AzureCLI@2
+    displayName: Allow Agent IP
+    inputs:
+      connectedServiceNameARM: <your-connected-service-name>
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: >-
+        az webapp config access-restriction add \
+            --resource-group <your-resource-group> \
+            --name <your-dotnet-web-app-name> \
+            --rule-name "$(agent.ip.firewall.rule.name)" \
+            --action Allow \
+            --ip-address $(AGENT_IP) \
+            --priority 100
+  - task: Bash@3
+    displayName: Check WebApp Connection
+    inputs:
+      targetType: inline
+      script: curl -I "$(dotnet.url)"
+  - task: DotNetCoreCLI@2
+    displayName: dotnet restore
+    inputs:
+      command: restore
+      projects: $(BuildParameters.projects)
+      feedRestore: <your-feed-restore-id>
+  - task: DotNetCoreCLI@2
+    displayName: dotnet build
+    inputs:
+      projects: $(BuildParameters.projects)
+      arguments: --configuration $(env) --no-restore
+      feedRestore: <your-feed-restore-id>
+  - task: DotNetCoreCLI@2
+    displayName: dotnet test
+    continueOnError: True
+    inputs:
+      command: test
+      projects: $(BuildParameters.projects)
+      arguments: --configuration $(env) --no-build
+      feedRestore: <your-feed-restore-id>
+  - task: AzureCLI@2
+    displayName: Forbid Agent IP
+    condition: always()
+    inputs:
+      connectedServiceNameARM: <your-connected-service-name>
+      scriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: >-
+        az webapp config access-restriction remove \
+            --resource-group <your-resource-group> \
+            --name <your-dotnet-web-app-name> \
+            --rule-name "$(agent.ip.firewall.rule.name)"
+  - task: Bash@3
+    displayName: Find Screenshots
+    inputs:
+      targetType: inline
+      script: >
+        ls $(specflow.livingdoc.screenshots.path)
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact: $(specflow.screenshots.artifact.name)'
+    inputs:
+      path: $(specflow.livingdoc.screenshots.path)
+      artifactName: $(specflow.screenshots.artifact.name)
+  - task: Bash@3
+    displayName: Get Specflow Screenshots Artifact Base URL
+    inputs:
+      targetType: inline
+      script: >-
+        get_artifact_url_command=$(echo 'curl -u :$SYSTEM_ACCESSTOKEN -H "Content-Type: application/json" "$SYSTEM_COLLECTIONURI$SYSTEM_TEAMPROJECT/_apis/build/builds/$BUILD_BUILDID/artifacts?artifactName=$SPECFLOW_SCREENSHOTS_ARTIFACT_NAME&api-version=7.2-preview.5"' | envsubst)
+        echo "$get_artifact_url_command"
+        jq --version
+        eval "$get_artifact_url_command" | jq .
+        url=$(eval "$get_artifact_url_command" | jq -r .resource.downloadUrl)
+        SCREENSHOTS_BASE_URL_PLACEHOLDER="${url/format=zip/format=file}&subPath="
+        export SCREENSHOTS_BASE_URL_PLACEHOLDER
+        echo "##vso[task.setvariable variable=SCREENSHOTS_BASE_URL_PLACEHOLDER]$SCREENSHOTS_BASE_URL_PLACEHOLDER"
+        echo "specflow screenshots artifact base url is: $SCREENSHOTS_BASE_URL_PLACEHOLDER"
+  - task: Bash@3
+    displayName: Install LivingDoc CLI
+    inputs:
+      targetType: inline
+      script: >-
+        dotnet tool install --global SpecFlow.Plus.LivingDoc.CLI
+        export PATH="$PATH:$HOME/.dotnet/tools"
+  - task: Bash@3
+    displayName: Generate LivingDoc HTML
+    inputs:
+      targetType: inline
+      script: >-
+        livingdoc feature-folder "$SOLUTION_DIRECTORY"/Tests --test-execution-json "$SOLUTION_DIRECTORY"/Tests/bin/"$env"/**/TestExecution.json --output $(specflow.livingdoc.html.path)
+        # Raw Copy to compare with the result
+        cp $(specflow.livingdoc.html.path) $(specflow.livingdoc.dir)/LivingDocRaw.html
+  - task: Bash@3
+    displayName: Make LivingDoc HTML Raw Copy
+    inputs:
+      targetType: inline
+      script: cp $(specflow.livingdoc.html.path) $(specflow.livingdoc.dir)/LivingDocRaw.html
+  - task: Bash@3
+    displayName: Find LivingDoc HTML
+    inputs:
+      targetType: inline
+      script: find "$PWD" -maxdepth 1
+  - task: PowerShell@2
+    displayName: Insert tags in placeholders into LivingDoc HTML
+    inputs:
+      filePath: $(solution.directory)/AddScriptsToHtml.ps1
+      arguments: -htmlFilePath $(specflow.livingdoc.html.path) -scriptFilePath $(solution.directory)/ReplaceTags.js
+  - task: PowerShell@2
+    displayName: Substitute Specflow Screenshots Artifact URL Placeholder
+    inputs:
+      targetType: inline
+      script: >
+        $myCommand = '(Get-Content $(specflow.livingdoc.html.path)).Replace("$(screenshots.base.url)", "$Env:SCREENSHOTS_BASE_URL_PLACEHOLDER") | Set-Content $(specflow.livingdoc.html.path)'
+        $ExecutionContext.InvokeCommand.ExpandString($myCommand)
+        Invoke-Expression $myCommand
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact: SpecFlow LivingDoc HTML'
+    inputs:
+      path: $(specflow.livingdoc.html.path)
+      artifactName: specflow-livingdoc-html
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact: SpecFlow LivingDoc HTML Raw'
+    inputs:
+      path: $(specflow.livingdoc.dir)/LivingDocRaw.html
+      artifactName: specflow-livingdoc-html-raw
+  - task: JakubRumpca.azure-pipelines-html-report.PublishHtmlReport.PublishHtmlReport@1
+    displayName: Publish Html Report
+    inputs:
+      reportDir: $(specflow.livingdoc.html.path)
+...

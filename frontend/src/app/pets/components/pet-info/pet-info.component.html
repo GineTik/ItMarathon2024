@@ -1,0 +1,106 @@
+<div class="pet-details-page">
+  <div class="gallery">
+    <pet-world-gallery [photos]="viewDetails.photos" />
+  </div>
+
+  <div class="details">
+    <header>
+      <h1 class="main-header">{{ viewDetails.title }}</h1>
+      <span class="price">{{ viewDetails.price | priceFormat: '₴' }}</span>
+    </header>
+
+    <section>
+      <h2 class="secondary-header">Контакти</h2>
+      <ul class="contacts">
+        <li class="contacts__item">
+          <span class="item__name item__name--contact">Контактна особа</span>
+          <span class="item__value">{{ viewDetails.userName }}</span>
+        </li>
+        <li class="contacts__item">
+          <span class="item__name item__name--phone">Номер телефону</span>
+          <!-- TODO: add <span class="app-tooltip-surrounder"> tag dynamically -->
+          <!-- TODO: add actual href to <a> -->
+          <span class="item__value">
+            {{ viewDetails.phoneNumber }}
+            <span class="app-tooltip-surrounder">
+              <a class="telegram-link app-tooltip-target" href="#" target="_blank" aria-describedby="telegram-tooltip">
+                <svg width="24" height="24">
+                  <use xlink:href="/assets/icons/sprite-icons-small.svg#telegram" />
+                </svg>
+              </a>
+              <span class="app-tooltip app-tooltip--telegram" id="telegram-tooltip" role="tooltip">
+                Продавець обрав telegram як бажаний спосіб звʼязку
+              </span>
+            </span>
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="secondary-header">Характеристики</h2>
+      <ul class="pet-details">
+        <li class="pet-details__item">
+          <span class="item__name item__name--type">Вид</span>
+          <span class="item__value">{{ viewDetails.animalType }}</span>
+        </li>
+        <li class="pet-details__item">
+          <span class="item__name item__name--breed">Різновид</span>
+          <span class="item__value">{{ viewDetails.breed || 'Невідомо' }}</span>
+        </li>
+        <li class="pet-details__item">
+          <span class="item__name item__name--sex">Стать</span>
+          <span class="item__value">{{ viewDetails.sex }}</span>
+        </li>
+        <li class="pet-details__item">
+          <span class="item__name item__name--age">Вік</span>
+          <span class="item__value">{{ viewDetails.age }}</span>
+        </li>
+        @if (viewDetails.color) {
+          <li class="pet-details__item">
+            <span class="item__name item__name--color">Забарвлення</span>
+            <span class="item__value">{{ viewDetails.color }}</span>
+          </li>
+        }
+        <li class="pet-details__item">
+          <span class="item__name item__name--location">Локація</span>
+          <span class="item__value">{{ viewDetails.location }}</span>
+        </li>
+        <li class="pet-details__item">
+          <span class="item__name item__name--origin">Походження</span>
+          <span class="item__value">{{ viewDetails.origin }}</span>
+        </li>
+
+        @if (viewDetails.health.length) {
+          <li class="pet-details__item pet-details__item--vertical">
+            <span class="item__name item__name--health">Здоровʼя</span>
+            <div class="item__chips">
+              @for (chips of viewDetails.health; track chips) {
+                <pet-world-chips [content]="chips" [isActive]="false" [isDisabled]="true" />
+              }
+            </div>
+          </li>
+        }
+        @if (viewDetails.documents.length) {
+          <li class="pet-details__item pet-details__item--vertical">
+            <span class="item__name item__name--documents">Документи</span>
+            <div class="item__chips">
+              @for (chips of viewDetails.documents; track chips) {
+                <pet-world-chips [content]="chips" [isActive]="false" [isDisabled]="true" />
+              }
+            </div>
+          </li>
+        }
+      </ul>
+    </section>
+  </div>
+
+  @if (viewDetails.summary) {
+    <section class="additional-info">
+      <h2 class="secondary-header">Додаткова інформація</h2>
+      <p class="additional-info__paragraph">
+        {{ viewDetails.summary }}
+      </p>
+    </section>
+  }
+</div>

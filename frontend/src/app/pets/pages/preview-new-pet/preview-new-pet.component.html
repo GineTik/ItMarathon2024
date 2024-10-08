@@ -1,0 +1,8 @@
+<pet-world-pet-info [proposalPreview]="proposal" [isUserOwned]="true" />
+
+<pet-world-pet-view-buttons
+  [cancelButton]="buttonContent.back"
+  [submitButton]="buttonContent.publish"
+  (submit)="onSubmit()"
+  (cancel)="onCancel()"
+/>

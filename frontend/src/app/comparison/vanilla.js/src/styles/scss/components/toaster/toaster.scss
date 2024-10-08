@@ -1,0 +1,38 @@
+.toast-wrapper {
+  position: fixed;
+  z-index: 1049;
+  top: 128px;
+  width: 100%;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  width: 720px;
+  margin: 0 auto;
+  padding: 20px 24px;
+  border: 1px solid;
+  border-radius: 28px;
+
+  &.error {
+    background-color: $color-red-4;
+    border-color: $color-red-5;
+  }
+
+  &.warning {
+    background-color: $color-yellow-1;
+    border-color: $color-yellow-2;
+  }
+
+  &.success {
+    background-color: $color-green-1;
+    border-color: $color-green-2;
+  }
+}
+
+.message {
+  @include text-sizes($font-size-s-3, $line-height-4, $letter-spacing-2);
+  @include text-overflow;
+  width: 600px;
+  margin-left: 16px;
+}

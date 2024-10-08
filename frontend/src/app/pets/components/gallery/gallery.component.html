@@ -1,0 +1,33 @@
+<div class="photo-preview__wrapper" [ngClass]="{ 'photo-preview__placeholder': !showPreviewImage }">
+  @if (showPreviewImage) {
+    <img
+      class="photo-preview"
+      [src]="photoArray()[photoPreviewId].url || photoArray()[photoPreviewId].image"
+      alt="pet photo"
+    />
+  }
+</div>
+<div
+  class="gallery-photo__list"
+  cdkDropList
+  (cdkDropListDropped)="drop($event)"
+  [cdkDropListDisabled]="!isEditMode()"
+  cdkDropListOrientation="horizontal"
+>
+  @for (photo of photoArray(); track $index) {
+    <pet-world-photo-uploader
+      [controlIndex]="$index"
+      [image]="photo.url || photo.image"
+      [ngClass]="{ disabled: !photo.url && !photo.image }"
+      [showEditButton]="isEditMode()"
+      [previewMode]="!isEditMode()"
+      [cdkDragDisabled]="!photo.url && !photo.image"
+      class="gallery-photo"
+      cdkDrag
+      cdkDragLockAxis="x"
+      (clickPhoto)="onClickPhoto($event)"
+      (editPhoto)="onEditPhoto($event)"
+      (removePhoto)="onRemovePhoto($event)"
+    />
+  }
+</div>

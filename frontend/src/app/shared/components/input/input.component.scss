@@ -1,0 +1,69 @@
+@import 'extends';
+@import 'mixins';
+@import 'variables';
+
+.input {
+  @include input-general-styles;
+  width: 100%;
+  height: 56px;
+  padding: 4px 16px;
+  font-size: $font-size-s-1;
+  line-height: $line-height-1;
+  letter-spacing: $letter-spacing-2;
+  font-weight: 400;
+
+  &::placeholder {
+    color: $color-gray-5;
+  }
+
+  &.ng-invalid {
+    &:is(.ng-dirty.ng-touched) {
+      border-color: $color-red-2;
+      outline-color: $color-red-2;
+    }
+  }
+
+  &__wrapper {
+    position: relative;
+    display: block;
+    cursor: pointer;
+  }
+
+  &__toggle-visibility {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &--icon {
+      fill: $color-gray-2;
+
+      &.invalid {
+        fill: $color-red-2;
+      }
+    }
+  }
+}
+
+.input__wrapper {
+  &:hover .input.ng-valid:enabled {
+    border-color: $color-blue-1;
+  }
+
+  &:focus-within .input.ng-valid {
+    border-color: $color-blue-1;
+  }
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}

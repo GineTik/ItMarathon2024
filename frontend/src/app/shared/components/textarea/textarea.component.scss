@@ -1,0 +1,21 @@
+@import 'variables';
+
+textarea.input {
+  padding: 20px 50px 4px 16px;
+  height: auto;
+  resize: none;
+}
+
+.input__counter {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  font-size: $font-size-s-4;
+  color: $color-gray-5;
+}
+
+.input {
+  &:placeholder-shown {
+    padding: 20px 16px;
+  }
+}

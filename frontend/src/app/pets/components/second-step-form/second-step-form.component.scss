@@ -1,0 +1,24 @@
+@import 'extends';
+@import 'mixins';
+
+.control__wrapper {
+  @include form-wrapper;
+  @include form-wrapper-stepper;
+}
+
+.age__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.age-number {
+  width: 244px;
+}
+
+.age-unit {
+  width: 140px;
+}
+
+.chips {
+  @include custom-control;
+}

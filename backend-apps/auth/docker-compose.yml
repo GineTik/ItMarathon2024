@@ -1,0 +1,58 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pet-project-app
+    volumes:
+      - ./pet-project:/pet-project
+    environment:
+      - DATABASE_HOST=db
+      - DATABASE_USER=admin
+      - DATABASE_PASSWORD=admin
+      - DATABASE_NAME=petproject
+      - SMTP_HOST=mailtrap
+      - SMTP_PORT=587
+      - SMTP_USERNAME=mailtrap
+      - SMTP_PASSWORD=supersecret
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - mailtrap
+    networks:
+      - app-network
+
+  db:
+    image: mysql
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: petproject
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+  mailtrap:
+    image: dbck/mailtrap:latest
+    environment:
+      - TZ=Europe/Berlin
+      - MAILTRAP_USER=mailtrap
+      - MAILTRAP_PASSWORD=supersecret
+    volumes:
+      - maildata:/var/mail
+    ports:
+      - "5151:80"
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+  maildata:
+
+networks:
+  app-network:

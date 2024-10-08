@@ -1,0 +1,71 @@
+@import 'mixins';
+@import 'extends';
+
+:host {
+  display: flex;
+  gap: 24px;
+  color: $color-black-3;
+}
+
+.hidden {
+  @include visually-hidden;
+}
+
+.edit-pet-details {
+  &__left {
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    flex-shrink: 0;
+    width: 704px;
+  }
+
+  &__properties {
+    .secondary-header {
+      @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-2, 500);
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.spacing-m {
+  display: block;
+  margin-bottom: 24px;
+}
+
+.spacing-s {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.animal-price {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.additional-info {
+  &__paragraph {
+    @include text-sizes($font-size-s-2, $line-height-1, $letter-spacing-2);
+  }
+}
+
+.chips {
+  @include custom-control;
+}
+
+.age {
+  &__wrapper {
+    display: flex;
+    gap: 8px;
+  }
+
+  &-number {
+    width: 349px;
+  }
+
+  &-unit {
+    flex-grow: 1;
+  }
+}

@@ -1,0 +1,53 @@
+@import 'mixins';
+@import 'variables';
+
+:host {
+  position: absolute;
+  top: -300px;
+  right: -84px;
+  width: 440px;
+  height: 176px;
+  padding: 28px 104px 32px 40px;
+  background-color: $color-white-1;
+  border-radius: $border-radius-6;
+  box-shadow:
+    1px 2px 5px $color-gray-9-a-1,
+    4px 7px 9px $color-gray-9-a-09,
+    10px 17px 12px $color-gray-9-a-05,
+    17px 30px 14px $color-gray-9-a-01;
+  visibility: hidden;
+  transition:
+    transform 0.5s ease-in,
+    visibility 0.5s ease-in;
+
+  &.visible {
+    transform: translateY(260px);
+    visibility: visible;
+    transition:
+      transform 0.5s ease-in,
+      visibility 0.5s ease-in;
+  }
+}
+
+.notification {
+  &__paragraph {
+    @include text-sizes($font-size-s-1, $line-height-1, $letter-spacing-2, 500);
+    color: $color-black-3;
+  }
+
+  &__action-container {
+    display: flex;
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  &__action-button {
+    width: 140px;
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
